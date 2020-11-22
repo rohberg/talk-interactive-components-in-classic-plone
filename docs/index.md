@@ -1,11 +1,8 @@
 # Interactive Components in Classic Plone
 
-Svelte in Plone
+**Svelte in Plone**
 
-Evernote “bobtemplates / plonecli and svelte”
-https://www.evernote.com/shard/s114/nl/12505810/bb051940-6c32-4957-bf09-170a7e6cf808/
-
-Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Maecenas faucibus mollis interdum. Nullam id dolor id nibh ultricies vehicula ut id elit.
+See this talk at https://interactive-components-in-classic-plone.readthedocs.io
 
 Maik Derstappen created a handy bob template that creates a Plone package with all essential elements for a Svelte app integrated in Plone.
 plonecli create addon rohberg.personsearch
@@ -171,9 +168,9 @@ Add component SearchResults to your App.svelte.
 
 We define it in SearchResults.svelte
 
+TODO Code and steps personsearch
 
-
-Information about Svelte
-Official Site with tutorial and API info: https://svelte.dev/
-Excellent training: Maximilian Schwarzmüller on Udemy https://www.udemy.com/course/sveltejs-the-complete-guide/learn/lecture/14689784#overview
-Mozilla Svelte tutorials https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks#Svelte_tutorials
+## Information about Svelte
+* Official Site with tutorial and API info: [https://svelte.dev/](https://svelte.dev/)
+* Excellent training: Maximilian Schwarzmüller on Udemy [https://www.udemy.com/course/sveltejs-the-complete-guide/learn/lecture/14689784#overview](https://www.udemy.com/course/sveltejs-the-complete-guide/learn/lecture/14689784#overview)
+* Mozilla Svelte tutorials [https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks#Svelte_tutorials](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks#Svelte_tutorials)
