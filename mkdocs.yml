@@ -1,1 +1,9 @@
 site_name: Interactive Components in Classic Plone
+
+theme:
+  name: material
+
+
+markdown_extensions:
+  - pymdownx.highlight:
+      linenums: true
