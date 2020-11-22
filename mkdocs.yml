@@ -1,9 +1,5 @@
 site_name: Interactive Components in Classic Plone
 
-google_analytics:
-  - G-4ZCB84695V
-  - auto
-
 theme:
   name: material
 
