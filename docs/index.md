@@ -70,67 +70,69 @@ See https://svelte-forms-lib-sapper-docs.now.sh/basic for more information about
 For a simple form with search field and selection of the region paste the following code in your ‘App.svelte’
 
     <script>  
-      import { createForm } from "svelte-forms-lib";
+        let name = "my-svelte-app";
 
-      const { form, handleChange, handleSubmit } = createForm({
-        initialValues: {
-          searchstring: "",
-          region: ""
-        },
-        onSubmit: values => {
-          alert(JSON.stringify(values));
+        let searchstring = '';
+        let region = 'all regions';
+        let menuregions = [
+          'all regions',
+          'Zürich',
+          'Basel',
+          'Bern'
+        ]
+
+        const handleClick = (event) => {
+          console.log(event.target.value);
+          region = event.target.value;
         }
-      });
     </script>
 
     <style>
-      main {
-        padding: 1em;
-        max-width: 240px;
-        margin: 0 auto;
-      }
-
-      h2 {
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
-      }
-
-      @media (min-width: 640px) {
         main {
-          max-width: none;
+          padding: 1em;
+          max-width: 350px;
+          margin: 0 auto;
         }
-      }
+
+        h2 {
+          text-transform: uppercase;
+          font-size: 4em;
+          font-weight: 100;
+        }
+
+        .regionbutton {
+          margin: 0 .3em 0 0;
+          background-color: white;
+          /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26); */
+          box-shadow: inset 0px 0px 5px #c1c1c1;
+          border-radius: 3px;
+        }
+
+        @media (min-width: 640px) {
+          main {
+            max-width: none;
+          }
+        }
     </style>
 
     <!--<svelte:options tag="my-svelte-app" /> -->
 
     <main>
-      <h2>Person Search</h2>
+        <h2>Person Search</h2>
 
-      <form on:submit={handleSubmit}>
+        <form action="">
+          <input class="searchstring" bind:value={searchstring} placeholder="search">
+          <br>
+          {#each menuregions as region}
+            <input 
+              type=button 
+              class="regionbutton" 
+              on:click|preventDefault={handleClick} 
+              value={region}>
+          {/each}
+        </form>
+        <p><i>Search{#if searchstring}{' '}for {searchstring}{/if} in {region}</i></p>
 
-        <label for="searchstring">searchstring</label>
-        <input
-          id="searchstring"
-          name="searchstring"
-          on:change={handleChange}
-          bind:value={$form.searchstring}
-        />
-
-        <label for="region">region</label>
-        <select
-          id="region"
-          name="region"
-          on:change={handleChange}
-          bind:value={$form.region}>
-          <option></option>
-          <option>Zurich</option>
-          <option>Basel</option>
-          <option>Bern</option>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
     </main>
 
 You see a simple form that even has an event handler.
@@ -140,10 +142,17 @@ You see a simple form that even has an event handler.
 We can use the values to fetch the according data of matching membrane users.
 But first let’s create some dummy cards.
 
+Add component SearchResults to your App.svelte.
+
+  <SearchResults />
+
+We define it in SearchResults.svelte
+
+TODO cards
 
 
 
-
+We need some experts with information about their competence, region and organization.
 
 Let’s add the Membrane dependency to our Plone package.
 
@@ -158,17 +167,94 @@ Let’s add the Membrane dependency to our Plone package.
         'dexterity.membrane>=3.0.0a1',
     ],
 
+We create a behavior 'expert' to add the fields competence, region and organization.
 
-Let’s now show some search results
+TODO behavior 'expert'
 
-TODO cards.
-Add component SearchResults to your App.svelte.
+Let’s now show some search results.
 
-  <SearchResults />
 
-We define it in SearchResults.svelte
+## Fetching the data from Plone via RestAPI
 
-TODO Code and steps personsearch
+We want to distinguish between Svelte standalone and in Plone:
+
+    npm install @rollup/plugin-replace --save-dev
+
+`rollup.config.js`:
+
+    import replace from '@rollup/plugin-replace';
+
+    const production = !process.env.ROLLUP_WATCH;
+
+    export default {
+      plugins: [
+        replace({
+          // two level deep object should be stringified
+          process: JSON.stringify({
+            env: {
+              isProd: production,
+            }
+          }),
+        }),
+      ],
+    };
+
+Now we can define the API URL to be /api/ for production (integration in Plone) and 'localhost:8080/api/' for developing with a standalone Svelte app.
+
+So we have
+
+    let apiURL = process.env.isProd ? '/api' : 'localhost:8080/api/';
+    let expert = [];
+
+and will fetch the data of experts on mount.
+
+We define an asynchron function that gets called on mount.
+
+    import { onMount } from "svelte";
+
+
+
+
+
+
+
+
+
+To have some information about the network stuff, we wrap TODO
+
+    {#await promise}
+      <p>...waiting</p>
+    {:then}
+TODO
+
+You see a network error. Why is this? Please go to your Plone configuration panel and install plone.restapi.
+
+set API url to TODO
+
+TODO CORS
+https://github.com/plone/plone.rest#cors
+
+`buildout.cfg`:
+
+    [instance]
+    zcml-additional =
+      <configure xmlns="http://namespaces.zope.org/zope"
+                xmlns:plone="http://namespaces.plone.org/plone">
+      <plone:CORSPolicy
+        allow_origin="http://localhost:10001,http://127.0.0.1:10001"
+        allow_methods="DELETE,GET,OPTIONS,PATCH,POST,PUT"
+        allow_credentials="true"
+        expose_headers="Content-Length,X-My-Header"
+        allow_headers="Accept,Authorization,Content-Type,X-Custom-Header,Origin"
+        max_age="3600"
+        />
+      </configure>
+
+
+You see all Persons. For filtering the search by region or searching for name and competence we will define an index for region and make name and competence searchable.
+
+
+
 
 ## Information about Svelte
 * Official Site with tutorial and API info: [https://svelte.dev/](https://svelte.dev/)
