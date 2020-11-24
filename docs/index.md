@@ -1,8 +1,9 @@
-# Interactive Components in Classic Plone
+# Interactive Components in Classic Plone with Svelte
 
-**Svelte in Plone**
+**Talk Plone Conference 2020  
+Katja Süss**
 
-See this talk at https://interactive-components-in-classic-plone.readthedocs.io
+[https://interactive-components-in-classic-plone.readthedocs.io](https://interactive-components-in-classic-plone.readthedocs.io)
 
 Maik Derstappen created a handy bob template that creates a Plone package with all essential elements for a Svelte app integrated in Plone.
 plonecli create addon rohberg.personsearch
@@ -57,83 +58,11 @@ The integration is done.
 - display fetched membrane users data
 
 We start with a search form.
-Note: I you use VSCode, install `svelte.svelte-vscode` to help you with the code.
-
-We use the form library svelte-forms-lib
-Install with 
-npm i svelte-forms-lib
-
-Import the lib in your .svelte file
-import { createForm } from "svelte-forms-lib";
-See https://svelte-forms-lib-sapper-docs.now.sh/basic for more information about the form library,
+Note: If you use VSCode, install `svelte.svelte-vscode` to help you with the code.
 
 For a simple form with search field and selection of the region paste the following code in your ‘App.svelte’
 
-    <script>  
-        let name = "my-svelte-app";
-
-        let searchstring = '';
-        let region = 'all regions';
-        let menuregions = [
-          'all regions',
-          'Zürich',
-          'Basel',
-          'Bern'
-        ]
-
-        const handleClick = (event) => {
-          console.log(event.target.value);
-          region = event.target.value;
-        }
-    </script>
-
-    <style>
-        main {
-          padding: 1em;
-          max-width: 350px;
-          margin: 0 auto;
-        }
-
-        h2 {
-          text-transform: uppercase;
-          font-size: 4em;
-          font-weight: 100;
-        }
-
-        .regionbutton {
-          margin: 0 .3em 0 0;
-          background-color: white;
-          /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26); */
-          box-shadow: inset 0px 0px 5px #c1c1c1;
-          border-radius: 3px;
-        }
-
-        @media (min-width: 640px) {
-          main {
-            max-width: none;
-          }
-        }
-    </style>
-
-    <!--<svelte:options tag="my-svelte-app" /> -->
-
-    <main>
-        <h2>Person Search</h2>
-
-        <form action="">
-          <input class="searchstring" bind:value={searchstring} placeholder="search">
-          <br>
-          {#each menuregions as region}
-            <input 
-              type=button 
-              class="regionbutton" 
-              on:click|preventDefault={handleClick} 
-              value={region}>
-          {/each}
-        </form>
-        <p><i>Search{#if searchstring}{' '}for {searchstring}{/if} in {region}</i></p>
-
-    </main>
+TODO just form
 
 You see a simple form that even has an event handler.
 
@@ -199,40 +128,82 @@ We want to distinguish between Svelte standalone and in Plone:
       ],
     };
 
-Now we can define the API URL to be /api/ for production (integration in Plone) and 'localhost:8080/api/' for developing with a standalone Svelte app.
+Now we can define the API URL to be `/` for production (integration in Plone) and `localhost:8080/Plone/` for developing with a standalone Svelte app.
 
 So we have
 
-    let apiURL = process.env.isProd ? '/api' : 'localhost:8080/api/';
-    let expert = [];
+    let apiURL = process.env.isProd ? '/' : 'http://localhost:8080/Plone/';
+    apiURL = apiURL + '@search?portal_type=dexterity.membrane.member&fullobjects=1'
+    let experts = [];
 
 and will fetch the data of experts on mount.
 
-We define an asynchron function that gets called on mount.
+We define an asynchronous function that gets called on mount.
 
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
+
+  snip
+
+  function getExperts() {
+    const response = fetch(apiURL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      experts = data.items;
+    })
+    .catch(error => {
+      console.error('There has been a problem with your fetch operation:', error);
+    });
+  };
+  
+  onMount(
+    async () => {
+      await getExperts();
+    }
+  );
+
+The fetch is addressing the REST API of Plone, its sending a GET request with json data. 
+We save the expert data to variable experts and catch errors like network errors.
 
 
+**Note**
 
+The Fetch API provides a JavaScript interface for accessing and manipulating parts of the HTTP pipeline, such as requests and responses. It also provides a global fetch() method that provides an easy, logical way to fetch resources asynchronously across the network.
 
+[https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 
+To have some information about the network stuff, we add aan else section to the each section.
 
+``` svelte  hl_lines="11-13"
+{#each experts as expert, i}
+  <div class="card">
+    <span class="fullname">{expert.first_name} {expert.last_name}</span>
+    <br>
+    <span class="region">{expert.competence}</span>
+    <br>
+    <span class="region">{expert.organisation}</span>
+    <br>
+    <span class="region">{expert.region}</span>
+  </div>
+{:else}
+  <!-- this block renders when experts.length === 0 -->
+  <p>loading...</p>
+{/each}
+```
 
+You see a network error in console. Why is this? Please go to your Plone configuration panel and install `plone.restapi`.
 
-
-To have some information about the network stuff, we wrap TODO
-
-    {#await promise}
-      <p>...waiting</p>
-    {:then}
-TODO
-
-You see a network error. Why is this? Please go to your Plone configuration panel and install plone.restapi.
-
-set API url to TODO
-
-TODO CORS
-https://github.com/plone/plone.rest#cors
+To solve the CORS situation we modify the buildout. See [https://github.com/plone/plone.rest#cors](https://github.com/plone/plone.rest#cors) for more information
 
 `buildout.cfg`:
 
@@ -250,8 +221,34 @@ https://github.com/plone/plone.rest#cors
         />
       </configure>
 
+Run buildout.
 
-You see all Persons. For filtering the search by region or searching for name and competence we will define an index for region and make name and competence searchable.
+
+You see all Persons.  
+For **filtering** the search by region or **searching** for name and competence we will define an index for region and make name and competence searchable.
+
+`catalog.xml`
+
+``` xml hl_lines="3-5"
+    <?xml version="1.0"?>
+    <object name="portal_catalog">
+      <index name="region" meta_type="FieldIndex">
+        <indexed_attr value="region"/>
+      </index>
+    </object>
+```
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
