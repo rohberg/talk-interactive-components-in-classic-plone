@@ -6,3 +6,5 @@ theme:
 markdown_extensions:
   - pymdownx.highlight:
       linenums: true
+  - pymdownx.superfences
+  
