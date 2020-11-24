@@ -140,37 +140,39 @@ and will fetch the data of experts on mount.
 
 We define an asynchronous function that gets called on mount.
 
-  import { onMount } from "svelte";
+``` svelte hl_lines="26-30"
+import { onMount } from "svelte";
 
-  snip
+snip
 
-  function getExperts() {
-    const response = fetch(apiURL, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      }
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      experts = data.items;
-    })
-    .catch(error => {
-      console.error('There has been a problem with your fetch operation:', error);
-    });
-  };
-  
-  onMount(
-    async () => {
-      await getExperts();
+function getExperts() {
+  const response = fetch(apiURL, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
     }
-  );
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    experts = data.items;
+  })
+  .catch(error => {
+    console.error('There has been a problem with your fetch operation:', error);
+  });
+};
+
+onMount(
+  async () => {
+    await getExperts();
+  }
+);
+```
 
 The fetch is addressing the REST API of Plone, its sending a GET request with json data. 
 We save the expert data to variable experts and catch errors like network errors.
@@ -182,9 +184,9 @@ The Fetch API provides a JavaScript interface for accessing and manipulating par
 
 [https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
 
-To have some information about the network stuff, we add aan else section to the each section.
+To have some information about the network stuff, we add an else section to the each section.
 
-``` svelte  hl_lines="11-13"
+``` svelte hl_lines="11-13"
 {#each experts as expert, i}
   <div class="card">
     <span class="fullname">{expert.first_name} {expert.last_name}</span>
