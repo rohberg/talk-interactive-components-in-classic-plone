@@ -60,7 +60,7 @@ Integrate your Svelte app in home page by pasting in TinyMCE
 
 The integration is done.
 
-## Person Search
+## Expert Search
 
 - search form
 - fetch membrane data 
