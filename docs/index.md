@@ -89,55 +89,54 @@ We start with a search form.
 
 For a simple form with search field and selection of the region paste the following code in a new file *ExpertSearch.svelte*
 
-```svelte hl_lines="10-11, 13"
-  <script>
-    const regions = [
-      'all regions',
-      'Zürich',
-      'Basel',
-      'Winterthur'
-    ]
+``` svelte hl_lines="10-11 13"
+<script>
+  const regions = [
+    'all regions',
+    'Zürich',
+    'Basel',
+    'Winterthur'
+  ]
 
-    // state of component
-    let searchstring = '';
-    let region = 'all regions';
+  // state of component
+  let searchstring = '';
+  let region = 'all regions';
 
-    const handleClickRegion = (event) => {
-      region = event.target.value;
-    }
-  </script>
+  const handleClickRegion = (event) => {
+    region = event.target.value;
+  }
+</script>
 
-  <h2>Expert Search</h2>
-  <form action="">
-    <input class="searchstring" bind:value={searchstring} placeholder="search">
-    <br>
-    {#each regions as rgn}
-      <input 
-        type=button
-        class="regionbutton"
-        on:click|preventDefault={handleClickRegion}
-        value={rgn}>
-    {/each}
-  </form>
-  <p>
-    <i>Results{#if searchstring}{' '}for {searchstring}{/if} in {region}</i>
-  </p>
-
+<h2>Expert Search</h2>
+<form action="">
+  <input class="searchstring" bind:value={searchstring} placeholder="search">
+  <br>
+  {#each regions as rgn}
+    <input 
+      type=button
+      class="regionbutton"
+      on:click|preventDefault={handleClickRegion}
+      value={rgn}>
+  {/each}
+</form>
+<p>
+  <i>Results{#if searchstring}{' '}for {searchstring}{/if} in {region}</i>
+</p>
 ```
 
 Add component `ExpertSearch` to your `App.svelte`.
 
 ``` svelte hl_lines="9"
-    <script>  
-      let name = "my-svelte-app";
+<script>  
+  let name = "my-svelte-app";
 
-      import ExpertSearch from './ExpertSearch.svelte';
-    </script>
+  import ExpertSearch from './ExpertSearch.svelte';
+</script>
 
 
-    <main>
-      <ExpertSearch />
-    </main>
+<main>
+  <ExpertSearch />
+</main>
 ```
 
 You see a simple form that even has an event handler.  
@@ -228,7 +227,7 @@ where we will fetch the data.
 
 We define an asynchronous function that gets called on mount of the component, on click on a region and on input of a searchstring.
 
-``` svelte hl_lines="15,19,21,43"
+``` svelte hl_lines="15 19 21 43"
 <script>
   const regions = [
     'all regions',
@@ -342,12 +341,12 @@ For **filtering** the search by region or **searching** for name, competence and
 `catalog.xml`
 
 ``` xml hl_lines="3-5"
-    <?xml version="1.0"?>
-    <object name="portal_catalog">
-      <index name="region" meta_type="FieldIndex">
-        <indexed_attr value="region"/>
-      </index>
-    </object>
+<?xml version="1.0"?>
+<object name="portal_catalog">
+  <index name="region" meta_type="FieldIndex">
+    <indexed_attr value="region"/>
+  </index>
+</object>
 ```
 
 Customize the schema of the behavior:
