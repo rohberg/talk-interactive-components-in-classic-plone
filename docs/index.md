@@ -34,7 +34,7 @@ Confirm every question except
 
 Install and start the Svelte app
 
-    cd svelte_src/my_svelte_app 
+    cd svelte_src/expertsearch-plus 
     npm install
     npm run dev
 
@@ -226,7 +226,7 @@ where we will fetch the data.
 
 We define an asynchronous function that gets called on mount of the component, on click on a region and on input of a searchstring.
 
-``` svelte hl_lines="2 22-43"
+``` svelte
 <script>
   const regions = [
     'all regions',
