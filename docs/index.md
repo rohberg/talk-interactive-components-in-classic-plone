@@ -16,7 +16,7 @@ What you will learn:
 
 ## Create Plone Add-On with Svelte
 
-Maik Derstappen created a handy bob template that creates a Plone package with all essential elements for a Svelte app integrated in Plone.
+There's a handy bob template that creates a Plone package with all essential elements for a Svelte app integrated in Plone.
 
 Install once the Plone Command Line Client *plonecli*
 
