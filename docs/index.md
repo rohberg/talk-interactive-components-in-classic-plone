@@ -89,7 +89,7 @@ We start with a search form.
 
 For a simple form with search field and selection of the region paste the following code in a new file *ExpertSearch.svelte*
 
-``` svelte hl_lines="10-11, 13"
+```svelte hl_lines="10-11, 13"
   <script>
     const regions = [
       'all regions',
