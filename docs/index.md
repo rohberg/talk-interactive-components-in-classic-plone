@@ -87,9 +87,9 @@ We start with a search form.
 
 > If you use VSCode, install `svelte.svelte-vscode` to get syntax highlighting and code tips.
 
-For a simple form with search field and selection of the region paste the following code in a new file ExpertSearch.svelte’
+For a simple form with search field and selection of the region paste the following code in a new file *ExpertSearch.svelte*
 
-``` svelte hl_lines="12 18"
+``` svelte hl_lines="10-11, 13"
   <script>
     const regions = [
       'all regions',
@@ -127,6 +127,7 @@ For a simple form with search field and selection of the region paste the follow
 
 Add component `ExpertSearch` to your `App.svelte`.
 
+``` svelte hl_lines="9"
     <script>  
       let name = "my-svelte-app";
 
@@ -137,6 +138,7 @@ Add component `ExpertSearch` to your `App.svelte`.
     <main>
       <ExpertSearch />
     </main>
+```
 
 You see a simple form that even has an event handler.  
 The info line below reflects the input of searchstring, because the input value is bound to variable *searchstring*.  
@@ -226,7 +228,7 @@ where we will fetch the data.
 
 We define an asynchronous function that gets called on mount of the component, on click on a region and on input of a searchstring.
 
-``` svelte
+``` svelte hl_lines="15,19,21,43"
 <script>
   const regions = [
     'all regions',
@@ -444,7 +446,7 @@ For the transition just add the declaration in the card markup.
     <div class="card" transition:scale animate:flip={{ duration: 300 }}> 
 
 
-You can find the app on https://github.com/rohberg/greenthumb.expertsearch
+> You can find the app on https://github.com/rohberg/greenthumb.expertsearch
 
 
 ## Information about Svelte
