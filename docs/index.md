@@ -7,10 +7,6 @@ Katja Süss, Rohberg**
 
 Video as part of the World Plone Day 2021 series: [WPD2021](https://www.youtube.com/watch?v=7wQHn-dVIAk) 
 
-<figure>
-  <img src="/img/expertsearchplus.gif" alt="expert search screencast" width="500" />
-</figure>
-
 ![expert search screencast](img/expertsearchplus.gif)
 
 We will see the following example: 
