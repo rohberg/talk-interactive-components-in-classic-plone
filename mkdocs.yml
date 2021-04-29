@@ -2,7 +2,7 @@ site_name: Interactive Components in Plone Classic
 
 theme:
   name: material
-  logo: assets/logo.png
+  logo: img/logo.png
 
 extra:
   homepage: https://www.rohberg.ch
