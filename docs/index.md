@@ -1,9 +1,7 @@
-![rohberg.ch](img/logo.png)
-
 # Interactive Components in Classic Plone with Svelte
 
 **Lightning Talk / Hands-On World Plone Day 2021, 
-Katja Süss**
+Katja Süss, Rohberg**
 
 [https://interactive-components-in-classic-plone.readthedocs.io](https://interactive-components-in-classic-plone.readthedocs.io)
 
@@ -459,5 +457,6 @@ For the transition just add the declaration in the card markup.
 * Mozilla Svelte tutorials [https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks#Svelte_tutorials](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Client-side_JavaScript_frameworks#Svelte_tutorials)
 
 
+![rohberg.ch](img/logo.png)
 
 Katja Süss, Rohberg, [www.rohberg.ch](https://wwww.rohberg.ch)
