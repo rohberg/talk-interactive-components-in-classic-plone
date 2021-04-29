@@ -1,9 +1,12 @@
 # Interactive Components in Classic Plone with Svelte
 
-**Lightning Talk World Plone Day 2021 
+**Lightning Talk / Hands-On World Plone Day 2021, 
 Katja Süss**
 
 [https://interactive-components-in-classic-plone.readthedocs.io](https://interactive-components-in-classic-plone.readthedocs.io)
+
+Video as part of the World Plone Day 2021 series: [WPD2021](https://www.youtube.com/watch?v=7wQHn-dVIAk) 
+
 
 We will look at the following example: 
 
