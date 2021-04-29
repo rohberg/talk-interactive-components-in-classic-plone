@@ -1,3 +1,5 @@
+![rohberg.ch](img/logo.png)
+
 # Interactive Components in Classic Plone with Svelte
 
 **Lightning Talk / Hands-On World Plone Day 2021, 
