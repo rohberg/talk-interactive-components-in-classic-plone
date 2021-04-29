@@ -2,7 +2,7 @@ site_name: Interactive Components in Plone Classic
 
 theme:
   name: material
-  logo: img/logo.png
+  logo: assets/logo.png
   palette:
     primary: deep purple
 
