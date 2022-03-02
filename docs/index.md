@@ -3,9 +3,9 @@
 **Lightning Talk / Hands-On World Plone Day 2021, 
 Katja Süss, Rohberg, [www.rohberg.ch](https://www.rohberg.ch)**
 
-Video as part of the World Plone Day 2021 series: [WPD2021](https://www.youtube.com/watch?v=7wQHn-dVIAk) 
+The [Video](https://www.youtube.com/watch?v=7wQHn-dVIAk) is part of the World Plone Day 2021 series.
 
-You are reading [https://interactive-components-in-classic-plone.readthedocs.io](https://interactive-components-in-classic-plone.readthedocs.io)
+You are reading the Hands-On to the training [https://interactive-components-in-classic-plone.readthedocs.io](https://interactive-components-in-classic-plone.readthedocs.io)
 
 ![expert search screencast](img/expertsearchplus.gif)
 
