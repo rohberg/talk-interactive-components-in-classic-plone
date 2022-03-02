@@ -1,4 +1,4 @@
-# Interactive Components in Classic Plone with Svelte
+# Interactive Components in Plone Classic with Svelte
 
 **Lightning Talk / Hands-On World Plone Day 2021, 
 Katja Süss, Rohberg, [www.rohberg.ch](https://www.rohberg.ch)**
