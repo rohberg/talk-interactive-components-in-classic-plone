@@ -460,4 +460,4 @@ For the transition just add the declaration in the card markup.
 
 ![rohberg.ch](img/logo.png)
 
-Katja Süss, Rohberg, [www.rohberg.ch](https://wwww.rohberg.ch)
+Katja Süss, Rohberg, [www.rohberg.ch](https://www.rohberg.ch)
